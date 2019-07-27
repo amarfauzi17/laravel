@@ -1,10 +1,9 @@
-@extends('admin.head')
+@extends('layouts.backend')
 @section('title', 'All Users')
 @section('content')
 <div class="col-xs-12">
     <h3 class="header smaller lighter blue">All Users</h3>
-    <div class="clearfix">
-    </div>
+    <div class="clearfix"></div>
     <div class="table-header">
         Users Table
     </div>
@@ -22,7 +21,6 @@
                         <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Name User</th>
                         <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Level</th>
                         <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Email</th>
-                        <!--<th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Status</th>-->
                         <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=""></th>
                     </tr>
                 </thead>
@@ -40,10 +38,7 @@
                         </td>
 
                         <td class="hidden-480">
-                            {{$user->level}} &nbsp;
-                            <a class="green" href="#{{$user->id}}-level" data-toggle="modal">
-                                <i class="ace-icon fa fa-pencil bigger-130"></i>
-                            </a>
+                            {{$user->level}}
                         </td>
                         <td>{{$user->email}}</td>
                         <td>
@@ -103,7 +98,7 @@
                         <div class="modal-body">
                             <p>Username :</p>
                             <h3>{{$user->name}}</h3>
-                            <form action="{{route('users.destroy',$user->id)}}" method="post" >
+                            <form action="{{route('admin.admin.destroy',$user->id)}}" method="post" >
                                 {{csrf_field()}}
                                 {{method_field('DELETE')}}
                                 <input type="submit" value="Hapus" class="btn btn-danger btn-block">
@@ -122,7 +117,7 @@
                             <h4 class="modal-title">Reset Password</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="{{route('resetPassUser',$user->id)}}" method="post" role="form">
+                            <form action="{{route('admin.admin.reset.password',$user->id)}}" method="post" role="form">
                                 {{csrf_field()}}
                                 {{method_field('patch')}}
                                 <label><b>Username : {{$user->name}}</b></label>
@@ -140,38 +135,6 @@
                     </div>
                 </div>
             </div> 
-            @endforeach
-            @foreach ($users as $user)
-            <div class="modal fade" id="{{$user->id}}-level">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" area-hidden="true">&times;</button>
-                            <h4 class="modal-title">Reset Password</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{route('changeAkses',$user->id)}}" method="post" role="form">
-                                {{csrf_field()}}
-                                {{method_field('patch')}}
-                                <label><b>Username : {{$user->name}}</b></label>
-                                <br>
-                                <br>
-                                <label><b>Level : {{$user->level}}</b></label>
-                                <br>
-                                <br>
-                                <select name="level_id" class="form-control" style="width: 100%">
-                                    <option value="" class="disable selected">Pilih Hak Akses</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="author">Author</option>    
-                                </select>
-                                <br>
-                                <br>
-                                <button style="width: 100%" type="submit" class="btn btn-primary">Change Level</button>
-                            </form>
-                        </div> 
-                    </div>
-                </div>
-            </div>
             @endforeach
             <div class="row">
                 <div class="col-xs-6">

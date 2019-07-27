@@ -136,8 +136,8 @@
             </a>
         </li>
 
-{{--         @if(Auth::user()->level == 'admin')
-        <li class="{{set_active_open(['user.showall','users.create'])}}">
+        @if (Auth::user()->level == "admin"))
+        <li class="{{set_active_open(['admin.admin.index','admin.admin.create'])}}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-users"></i>
                 <span class="menu-text"> Add User </span>
@@ -148,17 +148,16 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-                <li class="{{set_active('user.showall')}}">
-                    <a href="{{route('user.showall')}}">
+                <li class="{{set_active('admin.admin.index')}}">
+                    <a href="{{route('admin.admin.index')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         All Users
                     </a>
-
                     <b class="arrow"></b>
                 </li>
 
-                <li class="{{set_active('users.create')}}">
-                    <a href="{{route('users.create')}}">
+                <li class="{{set_active('admin.admin.create')}}">
+                    <a href="{{route('admin.admin.create')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Create User
                     </a>
@@ -167,7 +166,7 @@
                 </li>
             </ul>
         </li>
-        @endif --}}
+        @endif
         <li class="{{set_active_open(['admin.user.index',"admin.user.show.password"])}}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-cogs"></i>

@@ -1,4 +1,4 @@
-@extends('admin.head')
+@extends('layouts.backend')
 @section('title', 'Create Users')
 @section('content')
 
@@ -6,24 +6,12 @@
     <h1>Create User</h1>
 </div>
 <div class="row">
-    <form class="form-horizontal" action="{{route('users.store')}}" method="post">
+    <form class="form-horizontal" action="{{route('admin.admin.store')}}" method="post">
         {{csrf_field()}}
         <div class="form-group">
             <label class="col-sm-2 control-label no-padding-right" for="title">Name</label>
             <div class="col-md-8">
                 <input id="form-field-1-1" name="name" class="form-control" placeholder="Username" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label no-padding-right" for="title">Location Address</label>
-            <div class="col-md-8">
-                <input id="form-field-1-1" name="lokasi" class="form-control" placeholder="Ex : Gabon or Zimbabwe" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label no-padding-right" for="title">Age</label>
-            <div class="col-md-8">
-                <input id="form-field-1-1" name="umur" class="form-control" placeholder="Age" type="text">
             </div>
         </div>
         <div class="form-group">
