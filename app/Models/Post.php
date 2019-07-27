@@ -15,4 +15,14 @@ class Post extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
+
+    public function user()
+    {
+    	return $this->belongsTo(User::class,'author_id');
+    }
+
+    public function comments()
+    {
+    	return $this->hasMany(Comment::class);
+    }
 }

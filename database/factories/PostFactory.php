@@ -1,10 +1,10 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(App\Models\Post::class, function (Faker $faker) {
 	$category = Category::inRandomOrder()->first();
 	$user = User::inRandomOrder()->first();
 	$images = rand(10,12).".jpg";

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Post;
-use App\Tag;
+use App\Models\Post;
+use App\Models\Tag;
 
 class PostsTableSeeder extends Seeder
 {
@@ -13,7 +13,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-    	factory(App\Post::class, 20)->create()->each(function($item) {
+    	factory(App\Models\Post::class, 20)->create()->each(function($item) {
     		$tag = Tag::inRandomOrder()->first();
     		$item->tags()->attach($tag->id);
     	});

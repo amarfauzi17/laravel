@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Pages;
+use App\Models\Page;
 
 class PagesTableSeeder extends Seeder
 {
@@ -29,6 +29,6 @@ class PagesTableSeeder extends Seeder
         	]
         ];
 
-        Pages::insert($data);
+        Page::insert($data);
     }
 }

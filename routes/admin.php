@@ -23,6 +23,7 @@ Route::group(["middleware" => ["auth"], "namespace" => "Backend", "as" => "admin
   Route::post("user-change-password","UserController@changePassword")->name("user.change.password");
   Route::get("user-change-password","UserController@showPassword")->name("user.show.password");
 	Route::resource("user","UserController");
+  // admin
   Route::resource("admin","AdminController")->except("show","edit","update");
-  Route::patch("admin-reset-password","AdminController@resetPassword")->middleware("adminrole")->name("admin.reset.password");
+  Route::patch("admin-reset-password","AdminController@resetPassword")->name("admin.reset.password");
 });

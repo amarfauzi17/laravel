@@ -12,10 +12,10 @@
         <div class="top-menu">
             <ul>        
                 <li><a href="{{url('/')}}">Home</a></li> |  
-                <li><a href="{{route('about.show')}}">About Us</a></li> |   
+                <li><a href="{{route('author.index')}}">About Us</a></li> |   
                 @if (Route::has('login'))
                 @auth
-                <li><a href="{{ route('home') }}" class="btn1">Dasboard</a></li>
+                <li><a href="{{ route('dashboard.index') }}" class="btn1">Dasboard</a></li>
                 @else
                 <li><a id="modal_trigger" href="#modal" class="btn1">Login</a>
                     <div id="modal" class="popupContainer" style="display:none;">
@@ -89,43 +89,12 @@
                             </div>
                         </section>
                     </div>
-
-                    <script type="text/javascript">
-                        $("#modal_trigger").leanModal({top: 200, overlay: 0.6, closeButton: ".modal_close"});
-                        $(function () {
-                            // Calling Login Form
-                            $("#login_form").click(function () {
-                                $(".social_login").hide();
-                                $(".user_login").show();
-                                return false;
-                            });
-
-                            // Calling Register Form
-                            $("#register_form").click(function () {
-                                $(".social_login").hide();
-                                $(".user_register").show();
-                                $(".header_title").text('Register');
-                                return false;
-                            });
-
-                            // Going back to Social Forms
-                            $(".back_btn").click(function () {
-                                $(".user_login").hide();
-                                $(".user_register").hide();
-                                $(".social_login").show();
-                                $(".header_title").text('Login');
-                                return false;
-                            });
-
-                        })
-                    </script></li>  
+                </li>  
                 @endauth
                 @endif
             </ul>
         </div>
-        <!---pop-up-box---->  
 
-        <!---//pop-up-box---->
         <div id="small-dialog1" class="mfp-hide">
             <div class="signup">
                 <h3>Subscribe</h3>
@@ -138,22 +107,6 @@
             </div>
         </div>	
 
-        <script>
-            $(document).ready(function () {
-                $('.popup-with-zoom-anim').magnificPopup({
-                    type: 'inline',
-                    fixedContentPos: false,
-                    fixedBgPos: true,
-                    overflowY: 'auto',
-                    closeBtnInside: true,
-                    preloader: false,
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'my-mfp-zoom-in'
-                });
-
-            });
-        </script>	
         <div class="search">
             <form>
                 <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {
@@ -168,17 +121,10 @@
 </div>
 <span class="menu"></span>
 <div class="menu-strip">
-    <ul>     
+    <ul>
         <li><a href="{{url('/')}}">Home</a></li>
-        @foreach($pages as $cat)
-        <li><a href="{{$cat->slug}}">{{$cat->title}}</a></li>
+        @foreach($nav_pages as $page)
+        <li><a href="{{route("page.show",$page->slug)}}">{{$page->title}}</a></li>
         @endforeach
     </ul>
 </div>
-<script>
-    $("span.menu").click(function () {
-        $(".menu-strip").slideToggle("slow", function () {
-            // Animation complete.
-        });
-    });
-</script>

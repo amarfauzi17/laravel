@@ -136,7 +136,7 @@
             </a>
         </li>
 
-        @if (Auth::user()->level == "admin"))
+        @if (Auth::user()->level == "admin")
         <li class="{{set_active_open(['admin.admin.index','admin.admin.create'])}}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-users"></i>

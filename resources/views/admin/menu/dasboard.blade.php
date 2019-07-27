@@ -129,7 +129,7 @@
                                 <tbody>
                                     @foreach($posts->take(5) as $post)
                                     <tr>
-                                        <td><a href="{{route('posts.show',$post->slug)}}" target="_blank">{{$post->title}}</a></td>
+                                        <td><a href="{{route('post.show',$post->slug)}}" target="_blank">{{$post->title}}</a></td>
                                         <td>
                                             <b class="green">{{$post->visit_count}}</b>
                                         </td>

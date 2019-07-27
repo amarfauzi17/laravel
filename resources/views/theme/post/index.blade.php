@@ -1,5 +1,5 @@
 @extends('theme.head')
-@section('title', "$categories2->name Category")
+@section('title', "All Posts")
 @section('content')
 
 <div class="clearfix"></div><br>
@@ -26,7 +26,7 @@
                         <li><a href="#"><img src="{{asset('images/views.png')}}" title="view" /></a></li>
                         <li><a href="#"><img src="{{asset('images/likes.png')}}" title="likes" /></a></li>
                         <li><a href="#"><img src="{{asset('images/link.png')}}" title="link" /></a></li>
-                        <li><a class="readmore" href="{{route('singlepage.show',$post->slug)}}">ReadMore</a></li>
+                        <li><a class="readmore" href="{{route('post.show',$post->slug)}}">ReadMore</a></li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <div class="clearfix"> </div>
         </div>
         <div class="clearfix"> </div>
-        {!!$posts->links();!!}
+            {!!$posts->links()!!}
         <div class="clearfix"> </div>
         @else
         <div class="grids">

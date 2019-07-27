@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
-use App\Comment;
-use App\Post;
+use App\Http\Controllers\Controller;
+use App\Models\Page;
 
-class CommentsController extends Controller {
-
+class PageController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         //
     }
 
@@ -22,7 +23,8 @@ class CommentsController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
@@ -32,21 +34,9 @@ class CommentsController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'message' => 'required'
-        ]);
-
-        $comments = new Comment;
-        $comments->name = $request->name;
-        $comments->post_id = $request->post_id;
-        $comments->email = $request->email;
-        $comments->comment = $request->message;
-
-        $comments->save();
-        return back()->withInfo('Komentar Berhasil');
+    public function store(Request $request)
+    {
+        //
     }
 
     /**
@@ -55,8 +45,10 @@ class CommentsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        //
+    public function show($slug)
+    {
+        $page = Page::where("slug",$slug)->first();
+        return view("theme.page.show",compact('page'));
     }
 
     /**
@@ -65,7 +57,8 @@ class CommentsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
     }
 
@@ -76,7 +69,8 @@ class CommentsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         //
     }
 
@@ -86,8 +80,8 @@ class CommentsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
-
 }
