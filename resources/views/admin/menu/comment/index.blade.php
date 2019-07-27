@@ -1,36 +1,33 @@
-@extends('admin.head')
-@section('title', 'All Posts')
+@extends('layouts.backend')
+@section('title', 'All Comments')
 @section('content')
 <div class="col-xs-12">
-    <h3 class="header smaller lighter blue">All Posts</h3>
-    <div class="clearfix">
-
-    </div>
+    <h3 class="header smaller lighter blue">All Comments</h3>
+    <div class="clearfix"></div>
     <div class="table-header">
-        Posts Table
+        Comments Table
     </div>
     <div>
         <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
             <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
                 <thead>
-                    <tr role="row"><th class="center sorting_disabled" rowspan="1" colspan="1" aria-label="">
+                    <tr role="row">
+                        <th class="center sorting_disabled" rowspan="1" colspan="1" aria-label="">
                             <label class="pos-rel">
                                 <input class="ace" type="checkbox">
                                 <span class="lbl"></span>
                             </label>
                         </th>
-                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Title Post</th>
-                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Tanggal Post</th>
-                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">
-                            <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                            Update
-                        </th>
-                        <!--<th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Status</th>-->
+                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Name</th>
+                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Email</th>
+                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">comment</th>
+                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Post Title</th>
+                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Tanggal Comment</th>
                         <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=""></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($posts as $post)
+                    @foreach($comments as $comment)
                     <tr role="row" class="odd">
                         <td class="center">
                             <label class="pos-rel">
@@ -39,21 +36,21 @@
                             </label>
                         </td>
                         <td>
-                            <a href="#">{{$post->title}}</a>
+                            {{$comment->name}}
                         </td>
-
-                        <td class="hidden-480">{{date('j F Y',strtotime($post->created_at))}}</td>
-                        <td>{{date('j F Y',strtotime($post->updated_at))}}</td>
-                       <!-- <td class="hidden-480">
-                            <span class="label label-sm label-warning">Expiring</span>
-                        </td>-->
-
+                        <td>
+                            {{$comment->email}}
+                        </td>
+                        <td>
+                            {{$comment->comment}}
+                        </td>
+                        <td>
+                            {{$comment->post->title}}
+                        </td>
+                        <td class="hidden-480">{{date('j F Y',strtotime($comment->created_at))}}</td>
                         <td>
                             <div class="hidden-sm hidden-xs action-buttons">
-                                <a class="green" href="{{route('posts.edit',$post->id)}}">
-                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                </a>
-                                <a class="red" href="#{{$post->id}}-delete" data-toggle="modal">
+                                <a class="red" href="#{{$comment->id}}-delete" data-toggle="modal">
                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                 </a>
                             </div>
@@ -90,12 +87,12 @@
                                 </div>
                             </div>
                         </td>
-                    </tr><tr role="row" class="even">
-                        @endforeach
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
-            @foreach ($posts as $post)
-            <div class="modal fade" id="{{$post->id}}-delete">
+            @foreach ($comments as $comment)
+            <div class="modal fade" id="{{$comment->id}}-delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -104,8 +101,8 @@
                         </div>
                         <div class="modal-body">
                             <p>Title :</p>
-                            <h3>{{$post->title}}</h3>
-                            <form action="{{route('posts.destroy',$post->id)}}" method="post" >
+                            <h3>{{$comment->email}}</h3>
+                            <form action="{{route('admin.comment.destroy',$comment->id)}}" method="post" >
                                 {{csrf_field()}}
                                 {{method_field('DELETE')}}
                                 <input type="submit" value="Hapus" class="btn btn-danger btn-block">
@@ -117,13 +114,13 @@
             @endforeach
             <div class="row">
                 <div class="col-xs-6">
-                    <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">Showing {{$posts->currentPage()}} of {{$posts->lastPage() }} entries
+                    <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">Showing {{$comments->currentPage()}} of {{$comments->lastPage() }} entries
                     </div>       
                 </div>
                 <div class="col-xs-6">
                     <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
                         <ul class="pagination">
-                            {{ $posts->links() }}
+                            {{ $comments->links() }}
                         </ul>
                     </div>
                 </div>
@@ -131,5 +128,4 @@
         </div>
     </div>
 </div>
-
 @endsection

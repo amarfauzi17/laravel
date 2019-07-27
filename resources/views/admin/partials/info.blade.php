@@ -10,6 +10,19 @@
 </div>
 @endif
 
+@if(session('danger'))
+<div class="alert alert-block alert-danger">
+    <button type="button" class="close" data-dismiss="alert">
+        <i class="ace-icon fa fa-times"></i>
+    </button>
+    <i class="ace-icon fa fa-check red"></i>
+    <div class="text-center">
+        <strong class="red">
+            {{session('danger')}}
+        </strong>
+    </div>
+</div>
+@endif
 @if(session('info'))
 <div class="alert alert-block alert-success">
     <button type="button" class="close" data-dismiss="alert">

@@ -1,4 +1,4 @@
-@extends('admin.head')
+@extends('layouts.backend')
 @section('title', 'Create Pages')
 @section('content')
 
@@ -6,7 +6,7 @@
     <h1>Create Pages</h1>
 </div>
 <div class="row">
-    <form class="form-horizontal" action="{{route('pages.store')}}" method="post">
+    <form class="form-horizontal" action="{{route('admin.page.store')}}" method="post">
         {{csrf_field()}}
         <div class="form-group">
             <label class="col-sm-2 control-label no-padding-right" for="title">Title Pages</label>

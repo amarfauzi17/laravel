@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dasboard', 'HomeController@index')->name('home');
+// Route::get('/dasboard', 'HomeController@index')->name('home');
 
 Route::resource('posts', 'PostController');
 Route::resource('category', 'CategoryController');
@@ -52,4 +52,4 @@ Route::post('/changePassword', 'UserController@changePassword')->name('changePas
 
 Route::patch('alluser/{id}', 'UserController@resetPassUser')->name('resetPassUser');
 Route::patch('changelevel/{id}', 'UserController@changeAkses')->name('changeAkses');
-Route::get('query', 'CariController@search');
+// Route::get('query', 'CariController@search');

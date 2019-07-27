@@ -18,6 +18,9 @@ class CreatePostTagTable extends Migration
             $table->integer('post_id')->unsigned();
             $table->integer('tag_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign("post_id")->references("id")->on("posts")->onUpdate("CASCADE")->onDelete("CASCADE");
+            $table->foreign("tag_id")->references("id")->on("tags")->onUpdate("CASCADE")->onDelete("CASCADE");
         });
     }
 
@@ -28,6 +31,10 @@ class CreatePostTagTable extends Migration
      */
     public function down()
     {
+        Schema::table('post_tag', function (Blueprint $table) {
+            $table->dropForeign(['post_id']);
+            $table->dropForeign(['tag_id']);
+        });
         Schema::dropIfExists('post_tag');
     }
 }

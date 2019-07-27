@@ -4,7 +4,6 @@
     } catch (e) {
     }
 </script>
-
 <div id="sidebar" class="sidebar responsive ace-save-state">
     <script type="text/javascript">
         try {
@@ -43,15 +42,15 @@
     </div><!-- /.sidebar-shortcuts -->
 
     <ul class="nav nav-list">
-        <li class="{{set_active('home')}}">
-            <a href="{{url('/dasboard')}}">
+        <li class="{{set_active('admin.dashboard.index')}}">
+            <a href="{{route('admin.dashboard.index')}}">
                 <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Dashboard </span>
             </a>
             <b class="arrow"></b>
         </li>
 
-        <li class="{{set_active_open(['posts.create','posts.index','category.create','tags.create'])}}">
+        <li class="{{set_active_open(['admin.post.create','admin.post.index','admin.category.create','admin.tag.create'])}}">
             <a href="" class="dropdown-toggle">
                 <i class="menu-icon fa fa-desktop"></i>
                 <span class="menu-text">
@@ -63,23 +62,23 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-                <li class="{{set_active('posts.create')}}">
-                    <a href="{{route('posts.create')}}">
+                <li class="{{set_active('admin.post.create')}}">
+                    <a href="{{route('admin.post.create')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Create Post 
                         <b class="arrow"></b>
                     </a>
                 </li>
 
-                <li class="{{set_active('posts.index')}}">
-                    <a href="{{route('posts.index')}}">
+                <li class="{{set_active('admin.post.index')}}">
+                    <a href="{{route('admin.post.index')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         All Post
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li class="{{set_active('category.create')}}">
-                    <a href="{{route('category.create')}}">
+                <li class="{{set_active('admin.category.create')}}">
+                    <a href="{{route('admin.category.create')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Create Category
                     </a>
@@ -87,8 +86,8 @@
                     <b class="arrow"></b>
                 </li>
 
-                <li class="{{set_active('tags.create')}}">
-                    <a href="{{route('tags.create')}}">
+                <li class="{{set_active('admin.tag.create')}}">
+                    <a href="{{route('admin.tag.create')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Create Tag
                     </a>
@@ -96,7 +95,7 @@
                 </li>
             </ul>
         </li>
-        <li class="{{set_active_open(['pages.create','pages.index','pages.edit'])}}">
+        <li class="{{set_active_open(['admin.page.create','admin.page.index','admin.page.edit'])}}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-file-o"></i>
                 <span class="menu-text">
@@ -108,8 +107,8 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-                <li class="{{set_active('pages.index')}}">
-                    <a href="{{route('pages.index')}}">
+                <li class="{{set_active('admin.page.index')}}">
+                    <a href="{{route('admin.page.index')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         All Pages
                     </a>
@@ -117,8 +116,8 @@
                     <b class="arrow"></b>
                 </li>
 
-                <li class="{{set_active('pages.create')}}">
-                    <a href="{{route('pages.create')}}">
+                <li class="{{set_active('admin.page.create')}}">
+                    <a href="{{route('admin.page.create')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Create Pages
                     </a>
@@ -128,7 +127,16 @@
             </ul>
         </li>
 
-        @if(Auth::user()->level == 'admin')
+        <li class="{{set_active_open(['admin.comment.index'])}}">
+            <a href="{{route("admin.comment.index")}}">
+                <i class="menu-icon fa fa-comment"></i>
+                <span class="menu-text">
+                    Comments
+                </span>
+            </a>
+        </li>
+
+{{--         @if(Auth::user()->level == 'admin')
         <li class="{{set_active_open(['user.showall','users.create'])}}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-users"></i>
@@ -159,28 +167,26 @@
                 </li>
             </ul>
         </li>
-        @endif
-        <li class="{{set_active_open(['users.show','pass.show'])}}">
+        @endif --}}
+        <li class="{{set_active_open(['admin.user.index',"admin.user.show.password"])}}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-cogs"></i>
                 <span class="menu-text"> Setting </span>
 
                 <b class="arrow fa fa-angle-down"></b>
             </a>
-
             <b class="arrow"></b>
-
             <ul class="submenu">
-                <li class="{{set_active('users.show')}}">
-                    <a href="{{route('users.show',Auth::user()->id)}}">
+                <li class="{{set_active('admin.user.index')}}">
+                    <a href="{{route('admin.user.index')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         User Profile
                     </a>
 
                     <b class="arrow"></b>
                 </li>
-                <li class="{{set_active('pass.show')}}">
-                    <a href="{{route('changePassword')}}">
+                <li class="{{set_active('admin.user.show.password')}}">
+                    <a href="{{route('admin.user.show.password')}}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Change Password
                     </a>
@@ -190,8 +196,7 @@
             </ul>
         </li>
         <li class="">
-            <a href="{{ route('logout') }}" class="dropdown-toggle"onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
+            <a href="{{ route('logout') }}" class="dropdown-toggle"onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                 <i class="menu-icon fa fa-sign-out"></i>
                 <span class="menu-text"> Logout </span>
             </a>
@@ -200,8 +205,7 @@
             </form>
             <b class="arrow"></b>
         </li>
-    </ul><!-- /.nav-list -->
-
+    </ul>
     <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
         <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
     </div>

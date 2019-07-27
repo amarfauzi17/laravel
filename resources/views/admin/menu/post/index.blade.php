@@ -1,36 +1,34 @@
-@extends('admin.head')
-@section('title', 'All Pages')
+@extends('layouts.backend')
+@section('title', 'All Posts')
 @section('content')
 <div class="col-xs-12">
-    <h3 class="header smaller lighter blue">All Pages</h3>
-    <div class="clearfix">
-    </div>
+    <h3 class="header smaller lighter blue">All Posts</h3>
+    <div class="clearfix"></div>
     <div class="table-header">
-        Pages Table
+        Posts Table
     </div>
     <div>
         <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
-  
             <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
                 <thead>
-                    <tr role="row"><th class="center sorting_disabled" rowspan="1" colspan="1" aria-label="">
+                    <tr role="row">
+                        <th class="center sorting_disabled" rowspan="1" colspan="1" aria-label="">
                             <label class="pos-rel">
                                 <input class="ace" type="checkbox">
                                 <span class="lbl"></span>
                             </label>
                         </th>
-                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Title Pages</th>
-                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Tanggal Pages</th>
+                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Title Post</th>
+                        <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Tanggal Post</th>
                         <th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">
                             <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                             Update
                         </th>
-                        <!--<th class="sorting_disabled" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">Status</th>-->
                         <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=""></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($pages as $page)
+                    @foreach($posts as $post)
                     <tr role="row" class="odd">
                         <td class="center">
                             <label class="pos-rel">
@@ -39,21 +37,17 @@
                             </label>
                         </td>
                         <td>
-                            <a href="#">{{$page->title}}</a>
+                            <a href="#">{{$post->title}}</a>
                         </td>
 
-                        <td class="hidden-480">{{date('j F Y',strtotime($page->created_at))}}</td>
-                        <td>{{date('j F Y',strtotime($page->updated_at))}}</td>
-                       <!-- <td class="hidden-480">
-                            <span class="label label-sm label-warning">Expiring</span>
-                        </td>-->
-
+                        <td class="hidden-480">{{date('j F Y',strtotime($post->created_at))}}</td>
+                        <td>{{date('j F Y',strtotime($post->updated_at))}}</td>
                         <td>
                             <div class="hidden-sm hidden-xs action-buttons">
-                                <a class="green" href="{{route('pages.edit',$page->id)}}">
+                                <a class="green" href="{{route('admin.post.edit',$post->id)}}">
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
-                                <a class="red" href="#{{$page->id}}-delete" data-toggle="modal">
+                                <a class="red" href="#{{$post->id}}-delete" data-toggle="modal">
                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                 </a>
                             </div>
@@ -94,8 +88,8 @@
                     @endforeach
                 </tbody>
             </table>
-            @foreach ($pages as $page)
-            <div class="modal fade" id="{{$page->id}}-delete">
+            @foreach ($posts as $post)
+            <div class="modal fade" id="{{$post->id}}-delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -104,8 +98,8 @@
                         </div>
                         <div class="modal-body">
                             <p>Title :</p>
-                            <h3>{{$page->title}}</h3>
-                            <form action="{{route('pages.destroy',$page->id)}}" method="post" >
+                            <h3>{{$post->title}}</h3>
+                            <form action="{{route('admin.post.destroy',$post->id)}}" method="post" >
                                 {{csrf_field()}}
                                 {{method_field('DELETE')}}
                                 <input type="submit" value="Hapus" class="btn btn-danger btn-block">
@@ -117,13 +111,13 @@
             @endforeach
             <div class="row">
                 <div class="col-xs-6">
-                    <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">Showing {{$pages->currentPage()}} of {{$pages->lastPage() }} entries
+                    <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">Showing {{$posts->currentPage()}} of {{$posts->lastPage() }} entries
                     </div>       
                 </div>
                 <div class="col-xs-6">
                     <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
                         <ul class="pagination">
-                            {{ $pages->links() }}
+                            {{ $posts->links() }}
                         </ul>
                     </div>
                 </div>
@@ -131,5 +125,4 @@
         </div>
     </div>
 </div>
-
 @endsection

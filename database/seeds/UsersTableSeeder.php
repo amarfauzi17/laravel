@@ -15,7 +15,16 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
+            'foto' => '1539482267.jpg',
+            'level' => 'admin',
             'password' => bcrypt('admin')
+        ]);
+        User::create([
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+            'foto' => '1539482267.jpg',
+            'level' => 'user',
+            'password' => bcrypt('user')
         ]);
     }
 }
